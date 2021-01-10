@@ -10,6 +10,8 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js -e js,hbs,css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bart McPherson",
