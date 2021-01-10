@@ -1,16 +1,28 @@
 const path = require('path')
 const express = require('express')
-const shoutcast = require('./utils/shoutcast')
+const shoutCast = require('./utils/shoutcast')
+const geoIP = require('./utils/geoip')
 
 const app = express()
 const port = process.env.PORT || 4000
 
 app.get('', (req, res) => {
-  shoutcast((error, listenerData) => {
+  shoutCast((error, listenerData) => {
     if(error) {
       console.log('err: ' + error)
     } else {
       res.send(listenerData)
+    }
+  })
+})
+
+app.get('/geoinfo/:ip', (req, res) => {
+  let ip = req.params.ip
+  geoIP(ip,(error, geoInfo) => {
+    if(error) {
+      console.log('err: ' + error)
+    } else {
+      res.send(geoInfo)
     }
   })
 })
